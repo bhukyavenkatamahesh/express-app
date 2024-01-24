@@ -1,0 +1,255 @@
+<!-- views/data.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #191D28;
+        }
+
+        .logo {
+            color: #6CCACB;
+            font-size: 17px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        #inr {
+            background-color: #2E3241;
+            color: #FFFFFF;
+            border-radius: 8px;
+            margin-top: 30px;
+            padding: 7px;
+            border: none;
+            cursor: pointer;
+            /* Add a pointer cursor on hover */
+        }
+
+        #btc {
+            background-color: #2E3241;
+            color: #FFFFFF;
+            border-radius: 8px;
+            margin-top: 30px;
+            padding: 7px;
+            border: none;
+            cursor: pointer;
+            /* Add a pointer cursor on hover */
+        }
+
+        #buy-btc {
+            background-color: #2E3241;
+            color: #FFFFFF;
+            border-radius: 8px;
+            margin-top: 30px;
+            padding: 7px;
+            border: none;
+            cursor: pointer;
+            /* Add a pointer cursor on hover */
+        }
+
+        .last {
+            margin-top: 30px;
+            padding-right: 40px;
+
+        }
+
+        #timer {
+            background-color: transparent;
+            color: #6CCACB;
+            border-radius: 67px;
+            padding: 7px;
+            border: 3px solid #6CCACB;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        #telegram {
+            background-color: #6CCACB;
+            color: white;
+            border-radius: 8px;
+            padding: 7px;
+            border: 3px solid #6CCACB;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .trade {
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            color: #75777E;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: small;
+            padding-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .box-1,
+        .box-2,
+        .box-4,
+        .box-5 {
+            color: #6CCACB;
+            font-size: xx-large;
+            margin-top: 30px;
+
+
+        }
+
+        p {
+            color: #75777E;
+            font-size: medium;
+            text-align: center;
+        }
+
+        .box-3 {
+            color: beige;
+            font-size: 70px;
+            margin-top: 10px;
+
+        }
+
+        .down {
+            display: flex;
+            justify-content: center;
+            color: #75777E;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 8px;
+            padding-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        .table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        .table th {
+            background-color: #191D28;
+            padding: 10px;
+            text-align: center;
+            color: #555555;
+        }
+
+        .table td {
+            background-color: #4f525d;
+            padding: 10px;
+            color: azure;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: larger;
+        }
+
+        th,
+        td {
+            width: 150px;
+            text-align: center;
+            border: 1px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <h1>HODLINFO</h1>
+        </div>
+
+        <div class="middle">
+            <button id="inr">INR</button>
+            <button id="btc">BTC</button>
+            <button id="buy-btc">BUY BTC</button>
+        </div>
+
+        <div class="last">
+            <button id="timer">57</button>
+            <button id="telegram">Connect Telegram</button>
+
+        </div>
+    </div>
+    <div class="body">
+        <div class="trade">
+            <h1>Best Price to Trade</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="box-1">0.1% <br>
+            <p>5 mins</p>
+        </div>
+        <div class="box-2">0.96% <br>
+            <p>1 Hour</p>
+        </div>
+        <div class="box-3">₹ 26,56,110</div>
+        <div class="box-4">2.73% <br>
+            <p>1 Day</p>
+        </div>
+        <div class="box-5">7.51% <br>
+            <p>7 Days</p>
+        </div>
+    </div>
+    <div class="body">
+        <div class="down">
+            <h1>Average BTC/INR net price including commission
+            </h1>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Crypto Name</th>
+                <th>Last Traded Price</th>
+                <th>Buy / Sell Price</th>
+                <th>Difference</th>
+                <th>Savings</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(let i=0; i<storedData.length; i++) { %>
+                <tr>
+                    <td>
+                        <%= i+1 %>
+                    </td>
+                    <td>
+                        <%= storedData[i].name %>
+                    </td>
+                    <td>₹<%= storedData[i].last %>
+                    </td>
+                    <td>₹<%= storedData[i].buy %> / ₹<%= storedData[i].sell %>
+                    </td>
+                    <td>
+                        <%= storedData[i].difference %>
+                    </td>
+                    <td>₹<%= storedData[i].savings %>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+
+    <!-- Add your other content here -->
+
+    <script src="index.js"></script>
+</body>
+
+</html>
